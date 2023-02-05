@@ -1,6 +1,12 @@
 
 
-template = open('./templates/base.html').read() 
+
+
+
+
+
+#################################################################
+
 
 pages=[
       
@@ -22,25 +28,39 @@ pages=[
 
 
 
-def main():
-    for page in pages:
-        title = page['title']
-        print(title)
+template = open('./templates/base.html').read() 
+
+
+
+def handle_filename(page):
+    
+      
         filename = page['filename']
         print(filename)
+        return filename
+
+def handle_output(page):     
         output = page['output']
         print(output)
-        content = open(filename).read() 
-        finished_page = template.replace("{{content}}", content)
+        return output
 
-        open(output, "w+").write(finished_page)
+
+
+def main():
+    
+     for page in pages:
+         filename=handle_filename(page)
+         output=handle_output(page)
+         
+         handle_filename(page)# invoke the function
+         handle_output(page)
+         content = open(filename).read() 
+        
+         finished_page = template.replace("{{content}}", content)
+
+         open(output, "w+").write(finished_page)
+         
       
-
 main()
-
-    
-    
-    
-
 
 
